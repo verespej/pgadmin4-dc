@@ -6,32 +6,34 @@ To make life easier.
 
 ## Use
 ```
+docker network create pgadmin
 docker-compose up
 ```
 
 ## Example Complimentary Web Service Config
 ```
-version: "3.7"
-
 services:
   web:
     ...
     networks:
-      local-dev:
+      backend:
         aliases:
           - my-web-app
 
   db:
     ...
     networks:
-      local-dev:
+      backend:
+        aliases:
+         - my-web-app-db
+      pgadmin:
         aliases:
           - my-web-app-db
 
 networks:
-  local-dev:
-    external:
-      name: dev
+  backend:
+  pgadmin:
+    external: true
 
 ```
 

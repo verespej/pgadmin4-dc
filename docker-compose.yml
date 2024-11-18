@@ -1,7 +1,9 @@
-version: '3.7'
+networks:
+  pgadmin:
+    external: true
 
 services:
-  pg-admin:
+  pgadmin:
     image: dpage/pgadmin4
     ports:
       - "44556:80"
@@ -9,11 +11,6 @@ services:
       PGADMIN_DEFAULT_EMAIL: default@example.com
       PGADMIN_DEFAULT_PASSWORD: password
     networks:
-      - local-dev
+      - pgadmin
     volumes:
       - ./pgadmin_data:/var/lib/pgadmin
-
-networks:
-  local-dev:
-    external:
-      name: dev
